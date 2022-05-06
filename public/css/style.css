@@ -1,4 +1,4 @@
-/* global section */
+/* global section*/
 * { box-sizing: border-box; }
 
 :root {
@@ -32,6 +32,25 @@ body {
   height: 6rem;
   background: var(--sec);
 	box-shadow: var(--shadow);
+}
+
+.header-dropdown {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-dropdown-button {
+  color: var(--prim);
+  font-size: 2em;
+}
+
+.nav-dropdown-button:hover {
+  color:var(--trim);
+}
+
+.dropdown-item {
+  font-size: 2em;
 }
 
 .slanted-title-container {
@@ -93,17 +112,29 @@ body {
 
 /* main secton */
 
+.main {
+  padding: 1rem;
+}
+
+.main-404 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.error-404 {
+  color: var(--trim);
+  font-size: 2em;
+}
+
 .main-section {
-  margin: 1rem;
   margin-bottom: 4rem;
 }
 
-.about-box {
+.about-box,
+.item-info-box,
+.items-list-item {
   padding: 2rem;
-  /* The heading text expands into the padding, so
-   * let's add some additional padding to the top
-   * to even things out. */
-  padding-top: 3.4rem;
   border: 4px solid var(--trim);
   border-radius: 10px;
   background: var(--prim);
@@ -112,6 +143,17 @@ body {
   text-justify: justify;
   hyphens: auto;
   box-shadow: var(--shadow);
+}
+
+.about-box {
+  /* The heading text expands into the padding, so
+   * let's add some additional padding to the top
+   * to even things out. */
+  padding-top: 3.4rem;
+}
+
+.about-box-full > p {
+    margin-bottom: 1rem;
 }
 
 .about-heading {
@@ -129,14 +171,78 @@ body {
 }
 
 .slider-box {
-  width: 640px;
-  height: 480px;
+  width: 320px;;
+  height: 240px;
   border: 4px solid var(--trim);
   box-shadow: var(--shadow);
 }
 
+@media (min-width: 800px) {
+  .slider-box {
+    width: 640px;
+    height: 480px;
+  }
+}
+
 .slider-box:hover {
   border: 4px solid dodgerblue;
+}
+
+/* single item */
+.item-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2rem;
+}
+
+.single-item-img {
+  order: -1;
+}
+
+@media (min-width: 800px) {
+  .item-content {
+    flex-direction: row;
+  }
+
+  .single-item-img {
+    order: 1;
+  }
+}
+
+.checkout-button-section {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+/* items */
+.items-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  list-style: none;
+}
+
+.items-list-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 2rem;
+  width: 90%;
+  color: var(--sec);
+}
+
+@media (min-width: 800px) {
+  .items-list-item {
+    width: calc(100% / 4);
+  }
+}
+
+.items-list-name {
+  font-family: 'Luckiest Guy', cursive;
 }
 
 /* footer section */
