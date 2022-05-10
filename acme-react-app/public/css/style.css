@@ -1,0 +1,274 @@
+/* global section*/
+* { box-sizing: border-box; }
+
+:root {
+  --prim: #E9D3AE;
+  --sec: #2B4426;
+  --trim: #9D331A;
+  --shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.25)
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Acme', sans-serif;
+}
+
+/* header section */
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 3rem;
+  padding: 0;
+  height: 6rem;
+  background: var(--sec);
+  box-shadow: var(--shadow);
+}
+
+.header-dropdown {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-dropdown-button {
+  color: var(--prim);
+  font-size: 2em;
+}
+
+.nav-dropdown-button:hover {
+  color:var(--trim);
+}
+
+.dropdown-item {
+  font-size: 2em;
+}
+
+.slanted-title-container {
+  position: relative;
+  height: 100%;
+}
+
+.title-div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  height: 100%;
+  width: 8em;
+  background: var(--prim);
+  font-size: 3em;
+  clip-path: polygon(0% 0%, 0% 100%, 100% 100%, 80% 0%);
+}
+
+.title > a {
+  color: var(--sec);
+}
+
+.slanted-border {
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 100%;
+  width: 100px;
+  background: var(--trim);
+  clip-path: polygon(90% 100%, 20% 0%, 30.00% 0%, 100% 100%);
+}
+
+.category-nav {
+  display: inline-block;
+  padding: 1rem;
+}
+
+.category-nav-link {
+  color: var(--prim);
+  font-size: 2em;
+}
+
+.checkout-button {
+  margin: 1rem;
+  background: var(--trim);
+  color: var(--prim);
+  font-size: 2em;
+  box-shadow: var(--shadow);
+}
+
+.checkout-button:hover {
+  filter: grayscale(20%);
+}
+
+.checkout-button:active {
+  filter: grayscale(40%);
+}
+
+/* main secton */
+
+.main {
+  padding: 1rem;
+}
+
+.main-404 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.error-404 {
+  color: var(--trim);
+  font-size: 2em;
+}
+
+.main-section {
+  margin-bottom: 4rem;
+}
+
+.about-box,
+.item-info-box,
+.items-list-item {
+  padding: 2rem;
+  border: 4px solid var(--trim);
+  border-radius: 10px;
+  background: var(--prim);
+  color: var(--sec);
+  font-size: 2em;
+  text-align: justify;
+  hyphens: auto;
+  box-shadow: var(--shadow);
+}
+
+.about-box {
+  /* The heading text expands into the padding, so
+   * let's add some additional padding to the top
+   * to even things out. */
+padding-top: 3.4rem;
+}
+
+.about-box-full > p {
+  margin-bottom: 1rem;
+}
+
+.about-heading {
+  font-family: 'Luckiest Guy', cursive;
+  /* Prevent unecessary gap caused by the larger text. */
+  line-height: 0;
+  font-size: 2em;
+}
+
+.section-header {
+  margin-bottom: 2rem;
+  color: var(--trim);
+  font-size: 4em;
+  text-decoration: underline;
+}
+
+.slider-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 1rem;
+  width: 320px;;
+  height: 240px;
+  border: 4px solid var(--trim);
+  box-shadow: var(--shadow);
+}
+
+.slider-box > .img-fluid {
+  max-width: 200px;
+}
+
+@media (min-width: 800px) {
+  .slider-box {
+    width: 640px;
+    height: 480px;
+  }
+  .slider-box > .img-fluid {
+    max-width: 500px;
+  }
+}
+
+.slider-box:hover {
+  border: 4px solid dodgerblue;
+}
+
+/* single item */
+.item-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2rem;
+}
+
+.single-item-img {
+  order: -1;
+}
+
+@media (min-width: 800px) {
+  .item-content {
+    flex-direction: row;
+  }
+
+  .single-item-img {
+    order: 1;
+  }
+}
+
+.checkout-button-section {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+/* items */
+.items-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  list-style: none;
+}
+
+.items-list-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 2rem;
+  width: 90%;
+  color: var(--sec);
+}
+
+@media (min-width: 800px) {
+  .items-list-item {
+    width: calc(100% / 4);
+  }
+}
+
+.items-list-name {
+  font-family: 'Luckiest Guy', cursive;
+}
+
+/* footer section */
+
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  background: var(--sec);
+  color: var(--prim);
+}
+
+.footer-link {
+  color: var(--prim);
+}
