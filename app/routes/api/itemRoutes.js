@@ -8,6 +8,10 @@ router.get('/', (req, res) => {
 	dao.findAll(res, dao.table);
 });
 
+router.get('/top', (req, res) => {
+	dao.topItems(res);
+});
+
 router.get('/count', (req, res) => {
 	dao.countAll(res, dao.table);
 });
