@@ -13,6 +13,7 @@ CREATE TABLE user (
 CREATE TABLE store_item (
 	store_item_id INT UNSIGNED AUTO_INCREMENT NOT NULL,
 	name VARCHAR(256) NOT NULL,
+	img_path VARCHAR(256),
 	category ENUM('anvil', 'encabulator', 'leisure', 'medicine'),
 	description TEXT,
 	price DECIMAL(12,4) NOT NULL,
@@ -20,6 +21,13 @@ CREATE TABLE store_item (
 	last_update TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 	created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 	CONSTRAINT pk_store_item_id PRIMARY KEY (store_item_id)
+);
+
+CREATE TABLE top_item (
+	top_item_id INT UNSIGNED AUTO_INCREMENT NOT NULL,
+	store_item_id INT UNSIGNED NOT NULL,
+	CONSTRAINT pk_top_item_id PRIMARY KEY (top_item_id),
+	CONSTRAINT fk_store_item_id_top_item_acmeDB FOREIGN KEY (store_item_id) REFERENCES store_item (store_item_id)
 );
 
 CREATE TABLE cart_item (

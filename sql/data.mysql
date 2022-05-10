@@ -34,3 +34,8 @@ INSERT INTO store_item (name, category, description, price, user_rating) VALUES 
 	99.99,
 	5.0
 );
+
+INSERT INTO top_item(store_item_id) VALUES (1);
+INSERT INTO top_item(store_item_id) VALUES (2);
+INSERT INTO top_item(store_item_id) VALUES (3);
+INSERT INTO top_item(store_item_id) VALUES (4);
