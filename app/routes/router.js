@@ -8,9 +8,9 @@ router.use(express.static('public'));
 router.use('/bootstrap', express.static('node_modules/bootstrap/dist'));
 
 router.get('/', (req, res) => {
-    res.json({
-        'All Items': `${URL}/item`
-    });
+  res.json({
+    'All Items': `${URL}/item`
+  });
 });
 
 import itemRoutes from './api/itemRoutes.js';
@@ -38,16 +38,16 @@ router.use('/item', itemRoutes);
 // });
 
 router.get('*', (req, res) => {
-    switch(req.url) {
-        case '/favicon.ico':
-            res.end();
-            break;
-        default:
-            res.status(404).render('pages/404', {
-                title: '404 Error',
-                name: 'ACME Corportaion',
-            });
-    }
+  switch(req.url) {
+    case '/favicon.ico':
+      res.end();
+      break;
+    default:
+      res.status(404).render('pages/404', {
+        title: '404 Error',
+        name: 'ACME Corportaion',
+      });
+  }
 });
 
 export default router;
