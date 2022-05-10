@@ -1,0 +1,33 @@
+DROP DATABASE IF EXISTS `acmeDB`;
+CREATE DATABASE `acmeDB`;
+USE `acmeDB`;
+
+CREATE TABLE user (
+	user_id INT UNSIGNED AUTO_INCREMENT NOT NULL,
+	username VARCHAR(100) unique NOT NULL,
+	password CHAR(60) NOT NULL,
+	role ENUM('administrator', 'user'),
+	CONSTRAINT pk_user_id PRIMARY KEY (user_id)
+);
+
+CREATE TABLE store_item (
+	store_item_id INT UNSIGNED AUTO_INCREMENT NOT NULL,
+	name VARCHAR(256) NOT NULL,
+	category ENUM('anvil', 'encabulator', 'leisure', 'medicine'),
+	description TEXT,
+	price DECIMAL(12,4) NOT NULL,
+	user_rating FLOAT,
+	last_update TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+	created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+	CONSTRAINT pk_store_item_id PRIMARY KEY (store_item_id)
+);
+
+CREATE TABLE cart_item (
+	cart_item_id INT UNSIGNED AUTO_INCREMENT NOT NULL,
+	store_item_id INT UNSIGNED NOT NULL,
+	user_id INT UNSIGNED NOT NULL,
+	quantity TINYINT UNSIGNED NOT NULL,
+	constraint pk_cart_item_id PRIMARY KEY (cart_item_id),
+	CONSTRAINT fk_store_item_id_cart_item_acmeDB FOREIGN KEY (store_item_id) REFERENCES store_item (store_item_id),
+	CONSTRAINT fk_user_id_cart_item_acmeDB FOREIGN KEY (user_id) REFERENCES user (user_id)
+);

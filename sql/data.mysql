@@ -1,0 +1,36 @@
+use acmeDB;
+INSERT INTO store_item (name, category, description, price, user_rating) VALUES (
+	"Miniature Anvil",
+	"anvil",
+	"This miniature anvil, a marvel of modern technology, is specifically designed for the smithing needs of Keebler Elves. It also makes a nice keychain.",
+	10.99,
+	4.3
+);
+
+INSERT INTO store_item (name, category, description, price, user_rating) VALUES (
+	"Catapult",
+	"encabulator",
+	"A classic design. Guaranteed to take a castle within a three year siege.",
+	299.99,
+	3.0
+);
+
+INSERT INTO store_item (name, category, description, price, user_rating) VALUES (
+	"Rocket Skates",
+	"leisure",
+	"Travel to the convenience store like an astronaut with the ACME Rocket Skates!
+
+	[small]Not approved by or affiliated with NASA[/small]",
+	40.99,
+	5.0
+);
+
+INSERT INTO store_item (name, category, description, price, user_rating) VALUES (
+	"Hair Grow Tonic",
+	"medicine",
+	"Grow you hair out with this marvel of medicine, the ACME Hair Grow Tonic. Simply grab a bruch and paint onto any surface and watch the hair grow instantly!
+
+	[small]Warning: Hair color not guaranteed to match surrounding hair.[/small]",
+	99.99,
+	5.0
+);
