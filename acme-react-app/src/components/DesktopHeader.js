@@ -9,10 +9,10 @@ const DesktopHeader = () => {
       </div>
       <nav className="category-nav">
         <ul className="nav">
-          <li className="nav-item"><a className="category-nav-link nav-link" href="/anvils">Anvils</a></li>
-          <li className="nav-item"><a className="category-nav-link nav-link" href="/encabulators">Encabulators</a></li>
+          <li className="nav-item"><a className="category-nav-link nav-link" href="/anvil">Anvils</a></li>
+          <li className="nav-item"><a className="category-nav-link nav-link" href="/encabulator">Encabulators</a></li>
           <li className="nav-item"><a className="category-nav-link nav-link" href="/leisure">Leisure</a></li>
-          <li className="nav-item"><a className="category-nav-link nav-link" href="/miracle remedies">Miracle Remedies</a></li>
+          <li className="nav-item"><a className="category-nav-link nav-link" href="/medicine">Miracle Remedies</a></li>
         </ul>
       </nav>
       <button className="btn checkout-button">
