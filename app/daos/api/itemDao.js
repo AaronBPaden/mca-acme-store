@@ -20,7 +20,7 @@ class ItemDao extends Dao {
           console.log('DAO ERROR', err);
           return;
         }
-        this.spreadRows(res, rows);
+        this._spreadRows(res, rows);
       }
     );
   }
@@ -40,7 +40,7 @@ class ItemDao extends Dao {
           console.log('DAO ERROR', err);
           return;
         }
-        this.spreadRows(res, rows);
+        this._spreadRows(res, rows);
       }
     );
   }

@@ -25,7 +25,7 @@ class Dao {
           console.log('DAO ERROR', err);
           return;
         }
-        this.spreadRows(res, rows);
+        this._spreadRows(res, rows);
       }
     );
   }
@@ -43,7 +43,7 @@ class Dao {
           console.log('DAO ERROR', err);
           return;
         }
-        this.spreadRows(res, rows);
+        this._spreadRows(res, rows);
       }
     );
   }
@@ -59,7 +59,7 @@ class Dao {
           console.log('DAO ERROR', err);
           return;
         }
-        this.spreadRows(res, rows);
+        this._spreadRows(res, rows);
       }
     );
   }
@@ -71,7 +71,7 @@ class Dao {
    * @param {Response} res - an express Response object
    * @param {array} rows - a list of rows from the database
    */
-  spreadRows(res, rows) {
+  _spreadRows(res, rows) {
     rows.length === 1 ? res.json(...rows) : res.json(rows);
   }
 }
