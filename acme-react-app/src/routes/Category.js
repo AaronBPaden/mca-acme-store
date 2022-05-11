@@ -4,7 +4,7 @@ import ItemList from '../components/ItemList';
 const Category = (props) => {
   const [itemList, setItemList] = useState([]);
   useEffect(() => {
-    GetAPI({url: props.category, callback: setItemList});
+    GetAPI({url: `item/${props.category}`, callback: (res) => Array.isArray(res) ? setItemList(res) : setItemList([res])});
   }, [props.category]);
   return (
     <main className="main">
