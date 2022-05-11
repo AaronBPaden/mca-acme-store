@@ -9,7 +9,7 @@ const Items = (props) => {
     GetAPI({url: 'item', callback: setItemList});
   }, []);
   return (
-    <main class="main">
+    <main className="main">
       <ItemList
         sectionName="Anvils"
         itemList={itemList.filter(el => el.category === 'anvil')}

@@ -7,7 +7,7 @@ const Category = (props) => {
     GetAPI({url: props.category, callback: setItemList});
   }, [props.category]);
   return (
-    <main class="main">
+    <main className="main">
       <ItemList
         sectionName={props.sectionName}
         itemList={itemList}

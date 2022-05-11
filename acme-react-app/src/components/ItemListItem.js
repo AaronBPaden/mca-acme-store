@@ -13,7 +13,7 @@ const ItemListItem = (props) => {
             }
             alt="{props.item.name}"
           />
-          <h3 class="items-list-name">{props.item.name}</h3>
+          <h3 className="items-list-name">{props.item.name}</h3>
         </div>
       </Link>
     </li>
