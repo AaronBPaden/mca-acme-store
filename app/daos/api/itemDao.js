@@ -23,6 +23,26 @@ const itemDao = {
     );
   },
 
+  /**
+   * Select all items in a certain category.
+   * @param {Response} res - The express Response object.
+   * @param {string} category - The category, for example 'anvil'.
+   */
+  categoryItems: (res, category) => {
+    con.execute(`
+      SELECT * FROM
+        store_item
+      WHERE store_item.category = '${category}';`,
+      (err, rows) => {
+        if (err) {
+          console.log('DAO ERROR', err);
+          return;
+        }
+        dao.spreadRows(res, rows);
+      }
+    );
+  },
+
   // create: (req, res) => {
   //   if (Object.keys(req.body).length === 0) {
   //     res.json({

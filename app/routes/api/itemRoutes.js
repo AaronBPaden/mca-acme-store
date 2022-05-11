@@ -8,6 +8,22 @@ router.get('/', (req, res) => {
   dao.findAll(res, dao.table);
 });
 
+router.get('/anvil', (req, res) => {
+  dao.categoryItems(res, 'anvil');
+});
+
+router.get('/encabulator', (req, res) => {
+  dao.categoryItems(res, 'encabulator');
+});
+
+router.get('/leisure', (req, res) => {
+  dao.categoryItems(res, 'leisure');
+});
+
+router.get('/medicine', (req, res) => {
+  dao.categoryItems(res, 'medicine');
+});
+
 router.get('/top', (req, res) => {
   dao.topItems(res);
 });

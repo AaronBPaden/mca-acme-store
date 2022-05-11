@@ -9,7 +9,11 @@ router.use('/bootstrap', express.static('node_modules/bootstrap/dist'));
 
 router.get('/', (req, res) => {
   res.json({
-    'All Items': `${URL}/item`
+    'All Items': `${URL}/item`,
+    'All Anvils': `${URL}/item/anvil`,
+    'All Encabulators': `${URL}/item/encabulator`,
+    'All Leisure Items': `${URL}/item/leisure`,
+    'All Miracle Remedies': `${URL}/item/medicine`,
   });
 });
 
