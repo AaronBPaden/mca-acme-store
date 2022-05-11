@@ -1,11 +1,11 @@
 import { dbconfig as con } from '../../config/dbconfig.js';
 
-import dao from '../daoCommon.js';
+import Dao from '../daoCommon.js';
 
-const itemDao = {
-  table: 'store_item',
+class ItemDao extends Dao {
+  table = 'store_item'
 
-  topItems: (res) => {
+  topItems(res) {
     con.execute(`
       SELECT * FROM
         store_item
@@ -18,17 +18,17 @@ const itemDao = {
           console.log('DAO ERROR', err);
           return;
         }
-        dao.spreadRows(res, rows);
+        this.spreadRows(res, rows);
       }
     );
-  },
+  }
 
   /**
    * Select all items in a certain category.
    * @param {Response} res - The express Response object.
    * @param {string} category - The category, for example 'anvil'.
    */
-  categoryItems: (res, category) => {
+  categoryItems(res, category) {
     con.execute(`
       SELECT * FROM
         store_item
@@ -38,10 +38,10 @@ const itemDao = {
           console.log('DAO ERROR', err);
           return;
         }
-        dao.spreadRows(res, rows);
+        this.spreadRows(res, rows);
       }
     );
-  },
+  }
 
   // create: (req, res) => {
   //   if (Object.keys(req.body).length === 0) {
@@ -99,5 +99,5 @@ const itemDao = {
 }
 
 export {
-  itemDao,
+  ItemDao,
 };

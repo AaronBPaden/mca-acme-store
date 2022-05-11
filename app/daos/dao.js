@@ -1,12 +1,9 @@
 "use strict";
 import daoCommon from './daoCommon.js';
-import { itemDao as idao } from './api/itemDao.js';
+import { ItemDao } from './api/itemDao.js';
 
-const itemDao = {
-  ...daoCommon,
-  ...idao
-};
+const idao = new ItemDao();
 
 export {
-  itemDao,
+  idao as ItemDao,
 }

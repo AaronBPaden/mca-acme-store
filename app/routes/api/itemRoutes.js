@@ -2,7 +2,7 @@
 import express from 'express';
 const router = express.Router();
 
-import { itemDao as dao } from '../../daos/dao.js';
+import { ItemDao as dao } from '../../daos/dao.js';
 
 router.get('/', (req, res) => {
   dao.findAll(res, dao.table);

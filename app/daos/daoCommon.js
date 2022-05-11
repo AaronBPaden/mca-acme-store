@@ -2,8 +2,8 @@
 
 import { dbconfig as con } from '../config/dbconfig.js';
 
-const dao = {
-  findAll: (res, table) => {
+class Dao {
+  findAll(res, table) {
     con.execute(
       `SELECT * FROM ${table};`,
       (err, rows) => {
@@ -11,11 +11,11 @@ const dao = {
           console.log('DAO ERROR', err);
           return;
         }
-        dao.spreadRows(res, rows);
+        this.spreadRows(res, rows);
       }
     );
-  },
-  findById: (res, table, id) => {
+  }
+  findById(res, table, id) {
     con.execute(
       `SELECT * FROM ${table} WHERE ${table}_id = ?;`,
       [id],
@@ -24,11 +24,11 @@ const dao = {
           console.log('DAO ERROR', err);
           return;
         }
-        dao.spreadRows(res, rows);
+        this.spreadRows(res, rows);
       }
     );
-  },
-  countAll: (res, table) => {
+  }
+  countAll(res, table) {
     con.execute(
       `SELECT count(*) FROM ${table};`,
       (err, rows) => {
@@ -36,13 +36,13 @@ const dao = {
           console.log('DAO ERROR', err);
           return;
         }
-        dao.spreadRows(res, rows);
+        this.spreadRows(res, rows);
       }
     );
-  },
-  spreadRows: (res, rows) => {
+  }
+  spreadRows(res, rows) {
     rows.length === 1 ? res.json(...rows) : res.json(rows);
-  },
+  }
 }
 
-export default dao;
+export default Dao;
