@@ -1,19 +1,22 @@
+import Dropdown from 'react-bootstrap/Dropdown';
+
 const MobileHeader = () => {
   return(
     <header className="header header-dropdown">
-      <nav className="dropdown category-nav">
-        <button className="btn nav-dropdown-button dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
+      <Dropdown className="category-nav" id="dropdownMenuButton2">
+        {/* react-bootstrap defaults to btn-primary here, so we'll clear out variant to remove it. */}
+        <Dropdown.Toggle variant="" className="nav-dropdown-button">
           ACME Corporation
-        </button>
-        <ul className="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
-          <li><a className="dropdown-item" href="/">Home</a></li>
-          <li><hr className="dropdown-divider" /></li>
-          <li><a className="dropdown-item" href="/anvil">Anvils</a></li>
-          <li><a className="dropdown-item" href="/encabulator">Encabulators</a></li>
-          <li><a className="dropdown-item" href="/leisure">Leisure</a></li>
-          <li><a className="dropdown-item" href="/medicine">Miracle Remedies</a></li>
-        </ul>
-      </nav>
+        </Dropdown.Toggle>
+        <Dropdown.Menu>
+          <Dropdown.Item className="dropdown-item" href="/">Home</Dropdown.Item>
+          <Dropdown.Divider />
+          <Dropdown.Item className="dropdown-item" href="/anvil">Anvils</Dropdown.Item>
+          <Dropdown.Item className="dropdown-item" href="/encabulator">Encabulators</Dropdown.Item>
+          <Dropdown.Item className="dropdown-item" href="/leisure">Leisure</Dropdown.Item>
+          <Dropdown.Item className="dropdown-item" href="/medicine">Miracle Remedies</Dropdown.Item>
+        </Dropdown.Menu>
+      </Dropdown>
     </header>
   );
 }
