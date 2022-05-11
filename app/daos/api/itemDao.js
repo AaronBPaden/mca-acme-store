@@ -3,12 +3,14 @@ import { dbconfig as con } from '../../config/dbconfig.js';
 import Dao from '../daoCommon.js';
 
 class ItemDao extends Dao {
-  table = 'store_item'
+  constructor() {
+    super('store_item');
+  }
 
   topItems(res) {
     con.execute(`
       SELECT * FROM
-        store_item
+        ${this.table}
       INNER JOIN
         top_item
       ON
@@ -31,7 +33,7 @@ class ItemDao extends Dao {
   categoryItems(res, category) {
     con.execute(`
       SELECT * FROM
-        store_item
+        ${this.table}
       WHERE store_item.category = '${category}';`,
       (err, rows) => {
         if (err) {

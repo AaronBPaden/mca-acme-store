@@ -5,7 +5,7 @@ const router = express.Router();
 import { ItemDao as dao } from '../../daos/dao.js';
 
 router.get('/', (req, res) => {
-  dao.findAll(res, dao.table);
+  dao.findAll(res);
 });
 
 router.get('/anvil', (req, res) => {
@@ -29,11 +29,11 @@ router.get('/top', (req, res) => {
 });
 
 router.get('/count', (req, res) => {
-  dao.countAll(res, dao.table);
+  dao.countAll(res);
 });
 
 router.get('/:id', (req, res) => {
-  dao.findById(res, dao.table, req.params.id);
+  dao.findById(res, req.params.id);
 });
 
 // router.post('/create', (req, res) => {

@@ -3,9 +3,12 @@
 import { dbconfig as con } from '../config/dbconfig.js';
 
 class Dao {
-  findAll(res, table) {
+  constructor(table) {
+    this.table = table;
+  }
+  findAll(res) {
     con.execute(
-      `SELECT * FROM ${table};`,
+      `SELECT * FROM ${this.table};`,
       (err, rows) => {
         if (err) {
           console.log('DAO ERROR', err);
@@ -15,9 +18,9 @@ class Dao {
       }
     );
   }
-  findById(res, table, id) {
+  findById(res, id) {
     con.execute(
-      `SELECT * FROM ${table} WHERE ${table}_id = ?;`,
+      `SELECT * FROM ${this.table} WHERE ${this.table}_id = ?;`,
       [id],
       (err, rows) => {
         if (err) {
@@ -28,9 +31,9 @@ class Dao {
       }
     );
   }
-  countAll(res, table) {
+  countAll(res) {
     con.execute(
-      `SELECT count(*) FROM ${table};`,
+      `SELECT count(*) FROM ${this.table};`,
       (err, rows) => {
         if (err) {
           console.log('DAO ERROR', err);
