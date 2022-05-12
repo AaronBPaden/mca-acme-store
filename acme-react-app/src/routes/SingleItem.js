@@ -13,6 +13,7 @@ const SingleItem = () => {
     return <Error404 />
   }
   let paragraphs = item.description.split('\n\n');
+  let smallparagraphs = item.smalltext ? item.smalltext.split('\n\n') : [];
   return(
     <main className="main">
       <section className="main-section item-content">
@@ -20,6 +21,7 @@ const SingleItem = () => {
           <h2 className="section-header">{item.name}</h2>
           <div className="item-info-box">
             {paragraphs.map((p, i) => <p key={i}>{p}</p>)}
+            {smallparagraphs.map((p, i) => <p key={i}><small className="item-smalltext">{p}</small></p>)}
           </div>
         </div>
         <img className="img-fluid single-item-img" src={item.img_path ? item.img_path : "https://via.placeholder.com/1024x768"} alt={item.name} />

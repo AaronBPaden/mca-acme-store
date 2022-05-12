@@ -16,6 +16,7 @@ CREATE TABLE store_item (
 	img_path VARCHAR(256),
 	category ENUM('anvil', 'encabulator', 'leisure', 'medicine'),
 	description TEXT,
+	smalltext TEXT,
 	price DECIMAL(12,4) NOT NULL,
 	user_rating FLOAT,
 	last_update TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,

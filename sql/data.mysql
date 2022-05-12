@@ -15,22 +15,20 @@ INSERT INTO store_item (name, category, description, price, user_rating) VALUES 
 	3.0
 );
 
-INSERT INTO store_item (name, category, description, price, user_rating) VALUES (
+INSERT INTO store_item (name, category, description, smalltext, price, user_rating) VALUES (
 	"Rocket Skates",
 	"leisure",
-	"Travel to the convenience store like an astronaut with the ACME Rocket Skates!
-
-	[small]Not approved by or affiliated with NASA[/small]",
+	"Travel to the convenience store like an astronaut with the ACME Rocket Skates!",
+	"Not approved by or affiliated with NASA",
 	40.99,
 	5.0
 );
 
-INSERT INTO store_item (name, category, description, price, user_rating) VALUES (
+INSERT INTO store_item (name, category, description, smalltext, price, user_rating) VALUES (
 	"Hair Grow Tonic",
 	"medicine",
-	"Grow you hair out with this marvel of medicine, the ACME Hair Grow Tonic. Simply grab a bruch and paint onto any surface and watch the hair grow instantly!
-
-	[small]Warning: Hair color not guaranteed to match surrounding hair.[/small]",
+	"Grow you hair out with this marvel of medicine, the ACME Hair Grow Tonic. Simply grab a bruch and paint onto any surface and watch the hair grow instantly!",
+	"Warning: Hair color not guaranteed to match surrounding hair.",
 	99.99,
 	5.0
 );

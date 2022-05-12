@@ -155,6 +155,10 @@ body {
   box-shadow: var(--shadow);
 }
 
+.item-smalltext {
+  font-size: 0.6em;
+}
+
 .about-box {
   /* The heading text expands into the padding, so
    * let's add some additional padding to the top
