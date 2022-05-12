@@ -6,6 +6,7 @@ import Home from './routes/Home';
 import Items from './routes/Items';
 import Category from './routes/Category';
 import SingleItem from './routes/SingleItem';
+import Error404 from './routes/Error404';
 
 createRoot(document.getElementById('root')).render(
   <BrowserRouter>
@@ -17,6 +18,7 @@ createRoot(document.getElementById('root')).render(
       <Route path='/encabulator' element={<App route={<Category category="encabulator" sectionName="Encabulators" />} />} />
       <Route path='/leisure' element={<App route={<Category category="leisure" sectionName="Leisure" />} />} />
       <Route path='/medicine' element={<App route={<Category category="medicine" sectionName="Miracle Remedies" />} />} />
+      <Route path='*' element={<App route={<Error404 />} />} />
     </Routes>
   </BrowserRouter>
 );
