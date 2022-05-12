@@ -22,6 +22,7 @@ body {
 }
 
 #root {
+  /* used so the footer will always be on the bottom. */
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -120,6 +121,8 @@ body {
 /* main secton */
 
 .main {
+  /* take up all of the extra space when the content is smaller than the viewport. */
+  flex-grow: 1;
   padding: 1rem;
 }
 
