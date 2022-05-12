@@ -1,5 +1,6 @@
 import { Link, Outlet } from 'react-router-dom';
 const ItemListItem = (props) => {
+  console.log(props.item);
   return(
     <li>
       <Link to={`/item/${props.item.store_item_id}`}>
