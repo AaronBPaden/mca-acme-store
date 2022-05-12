@@ -2,11 +2,14 @@ import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import App from './App';
+
+// Routes
 import Home from './routes/Home';
 import Items from './routes/Items';
 import Category from './routes/Category';
 import SingleItem from './routes/SingleItem';
 import Error404 from './routes/Error404';
+import About from './routes/About';
 
 createRoot(document.getElementById('root')).render(
   <BrowserRouter>
@@ -18,6 +21,7 @@ createRoot(document.getElementById('root')).render(
       <Route path='/encabulator' element={<App route={<Category category="encabulator" sectionName="Encabulators" />} />} />
       <Route path='/leisure' element={<App route={<Category category="leisure" sectionName="Leisure" />} />} />
       <Route path='/medicine' element={<App route={<Category category="medicine" sectionName="Miracle Remedies" />} />} />
+      <Route path='/about' element={<App route={<About />} />} />
       <Route path='*' element={<App route={<Error404 />} />} />
     </Routes>
   </BrowserRouter>
