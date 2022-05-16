@@ -1,5 +1,3 @@
-"use strict";
-
 import { dbconfig as con } from '../config/dbconfig.js';
 
 /**
