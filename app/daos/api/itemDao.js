@@ -1,8 +1,8 @@
 import { dbconfig as con } from '../../config/dbconfig.js';
 
-import Dao from '../daoCommon.js';
+import DaoPublic from '../daoPublic.js';
 
-class ItemDao extends Dao {
+class ItemDao extends DaoPublic {
   constructor() {
     super('store_item');
   }
