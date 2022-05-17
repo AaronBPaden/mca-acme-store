@@ -7,22 +7,16 @@ class ItemDao extends DaoPublic {
     super('store_item');
   }
 
-  topItems(res) {
-    con.execute(`
+  async topItems(res) {
+    const rows = await this._execute(`
       SELECT * FROM
         ${this.table}
       INNER JOIN
         top_item
       ON
         store_item.store_item_id = top_item.top_item_id`,
-      (err, rows) => {
-        if (err) {
-          console.log('DAO ERROR', err);
-          return;
-        }
-        this._spreadRows(res, rows);
-      }
     );
+    if (rows) this._spreadRows(res, rows);
   }
 
   /**
@@ -30,19 +24,13 @@ class ItemDao extends DaoPublic {
    * @param {Response} res - The express Response object.
    * @param {string} category - The category, for example 'anvil'.
    */
-  categoryItems(res, category) {
-    con.execute(`
+  async categoryItems(res, category) {
+    const rows = await this._execute(`
       SELECT * FROM
         ${this.table}
-      WHERE store_item.category = '${category}';`,
-      (err, rows) => {
-        if (err) {
-          console.log('DAO ERROR', err);
-          return;
-        }
-        this._spreadRows(res, rows);
-      }
+      WHERE store_item.category = '${category}';`
     );
+    if (rows) this._spreadRows(res, rows);
   }
 
   // create: (req, res) => {

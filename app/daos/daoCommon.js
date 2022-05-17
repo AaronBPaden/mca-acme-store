@@ -20,6 +20,13 @@ class Dao {
    * @param {array} rows - a list of rows from the database
    */
   _spreadRows(res, rows) {
+    if (rows.length === 0) {
+      res.status(404).json({
+        error: true,
+        message: "empty rows"
+      });
+      return;
+    }
     rows.length === 1 ? res.json(...rows) : res.json(rows);
   }
 
@@ -56,13 +63,30 @@ class Dao {
    * @param {checkCallback} validator the validation check to run
    * @returns {boolean} return true if the check passes
    */
-  _checkRequest(req, res, msg, validator) {
-    if (!validator(req)) {
+  async _checkRequest(req, res, msg, validator) {
+    if (!await validator(req)) {
       // Status 400 indicates a bad request
       this._sendError(400, res, msg);
       return false;
     }
     return true;
+  }
+
+  /**
+   * Execute a database query.
+   * @private
+   *
+   * @param {string} query the query to execute
+   * @param {array} values an optional list of values to be escaped in the query
+   */
+  async _execute(query, values = null) {
+    let rows;
+    try {
+      [rows] = await con.execute(query, values);
+    } catch (err) {
+      console.log(err);
+    }
+    return rows;
   }
 }
 
