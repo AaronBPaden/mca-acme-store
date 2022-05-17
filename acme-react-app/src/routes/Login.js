@@ -3,7 +3,7 @@ import ApiConfig from '../config/ApiConfig';
 import axios from 'axios';
 import { useCookies } from 'react-cookie';
 const Login = () => {
-  const [cookies, setCookie] = useCookies(['acme-user']);
+  const setCookie = useCookies(['acme-user'])[1];
   let [ formState, setFormState ] = useState({
     username: "",
     password: "",
