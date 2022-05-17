@@ -15,6 +15,8 @@ const MobileHeader = () => {
           <Dropdown.Item className="dropdown-item" href="/encabulator">Encabulators</Dropdown.Item>
           <Dropdown.Item className="dropdown-item" href="/leisure">Leisure</Dropdown.Item>
           <Dropdown.Item className="dropdown-item" href="/medicine">Miracle Remedies</Dropdown.Item>
+          <Dropdown.Divider />
+          <Dropdown.Item className="dropdown-item" href="/login">Register/Login</Dropdown.Item>
         </Dropdown.Menu>
       </Dropdown>
     </header>
