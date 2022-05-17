@@ -28,7 +28,8 @@ class UserDao extends DaoCommon {
     const rows = await this._execute(`
       SELECT * FROM
         ${this.table}
-      WHERE username = '${req.body.username}';`,
+      WHERE username = '?';`,
+      [req.body.username]
     );
     if (!rows) return true;
     // This should not be possible
