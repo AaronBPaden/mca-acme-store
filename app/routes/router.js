@@ -20,26 +20,8 @@ router.get('/', (req, res) => {
 import itemRoutes from './api/itemRoutes.js';
 router.use('/item', itemRoutes);
 
-// router.get('/single-item', (req, res) => {
-//     res.render('pages/single-item', {
-//         title: 'Single Item Page',
-//         name: 'ACME Corporation',
-//     });
-// });
-
-// router.get('/about', (req, res) => {
-//     res.render('pages/about', {
-//         title: 'Single Item Page',
-//         name: 'ACME Corporation',
-//     });
-// });
-
-// router.get('/items', (req, res) => {
-//     res.render('pages/items', {
-//         title: 'Item Page',
-//         name: 'ACME Corporation',
-//     });
-// });
+import userRoutes from './api/userRoutes.js';
+router.use('/user', userRoutes);
 
 router.get('*', (req, res) => {
   switch(req.url) {

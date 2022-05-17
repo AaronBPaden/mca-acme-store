@@ -24,7 +24,7 @@ class DaoPublic extends DaoCommon {
   /**
    * Find a single item on a table.
    * @param {Response} res - an express Response object
-   * @param {int} id - the unique key for the table
+   * @param {number} id - the unique key for the table
    */
   findById(res, id) {
     con.execute(
