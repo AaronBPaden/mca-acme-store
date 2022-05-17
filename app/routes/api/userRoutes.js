@@ -7,4 +7,12 @@ router.post('/register', (req, res) => {
   dao.create(req, res);
 });
 
+router.post('/validate', (req, res) => {
+  dao.validateLogin(req, res);
+});
+
+router.post('/login', (req, res) => {
+  dao.login(req, res);
+});
+
 export default router;

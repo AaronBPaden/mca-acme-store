@@ -1,6 +1,8 @@
 import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
 
 import { dbconfig as con } from '../../config/dbconfig.js';
+import ServerConfig from '../../config/ServerConfig.js';
 import DaoCommon from '../daoCommon.js';
 
 class UserDao extends DaoCommon {
@@ -38,6 +40,17 @@ class UserDao extends DaoCommon {
     }
     return false;
   }
+
+  async _testUsernameExistsInDB(req) {
+    const rows = await this._execute(`
+      SELECT * FROM
+        ${this.table}
+      WHERE username = ?;`,
+      [req.body.username]
+    );
+    return rows.length === 1;
+  }
+
 
   async _testPasswordExists(req) {
     return req.body.password && req.body.password !== "";
@@ -77,6 +90,8 @@ class UserDao extends DaoCommon {
     const saltRounds = 10;
     const table = this.table;
     const sendError = this._sendError;
+    const username = req.body.username;
+    const generateToken = this._generateToken;
     bcrypt.hash(req.body.password, saltRounds, async function(err, hash) {
       if (err) {
         console.log('DAO ERROR', err);
@@ -84,7 +99,7 @@ class UserDao extends DaoCommon {
         return;
       }
       const fields = ['username', 'password'];
-      const values = [req.body.username, hash];
+      const values = [username, hash];
       let dbres;
       try {
         [dbres] = await con.execute(
@@ -96,12 +111,92 @@ class UserDao extends DaoCommon {
         sendError(500, res, 'Could not complete request.');
         return;
       }
-      console.log(`Creating new user ${JSON.stringify(dbres)}`);
+      console.log(`Creating new user ${username}`);
+      const token = generateToken(username);
       res.json({
-        user: req.body.username
+        username: username,
+        token: token
       });
     });
   }
+
+  async _findByNameTests(req, res) {
+    if (!await this._checkRequest(req, res, 'Username must be alphanumeric', this._testUsernameCharacters.bind(this))) return false;
+    if (!await this._checkRequest(req, res, 'Username too long', this._testUsernameLength.bind(this))) return false;
+    if (!await this._checkRequest(req, res, 'Username does not exist', this._testUsernameExistsInDB.bind(this))) return false;
+    return true;
+  }
+
+  /**
+   * Validate a token
+   */
+  _validateToken(username, token, res) {
+    let verified = false;;
+    jwt.verify(token, ServerConfig.SECRET, (err, user) => {
+      if (err) {
+        console.log(`Attempted access with invalid token: ${username}`, err);
+        res.sendStatus(403)
+        return;
+      }
+      verified = username === user.username;
+    })
+    return verified;
+  }
+
+  /**
+   * Validate user session. Token required for validation.
+   * @param {Request} req an express Request object
+   * @param {Response} res an express Response object
+   */
+  async validateLogin(req, res) {
+    if (!await this._findByNameTests(req, res)) return;
+    if (!this._validateToken(req.body.username, req.body.token, res)) return;
+    res.json({
+      success: true
+    });
+  }
+
+  /**
+   * Greate a JSON Web Token
+   * Info taken from tutorial at https://www.digitalocean.com/community/tutorials/nodejs-jwt-expressjs
+   * @private
+   *
+   * @param {string} username
+   *
+   * // TODO: verify what this type is called
+   * @return {Token} a jwt token
+   */
+  _generateToken(username) {
+    return jwt.sign({username: username}, ServerConfig.SECRET, {expiresIn: '60s'});
+  }
+
+  async _testPasswordCorrect(req) {
+    const rows = await this._execute(`
+      select password from ${this.table} where username = ?;`,
+      [req.body.username]
+    );
+    const hash = rows.password;
+    return await bcrypt.compare(req.body.password, hash);
+  }
+
+  async _loginTests(req, res) {
+    if (!await this._checkRequest(req, res, 'login failed', this._testUsernameLength.bind(this))) return false;
+    if (!await this._checkRequest(req, res, 'login failed', this._testUsernameCharacters.bind(this))) return false;
+    if (!await this._checkRequest(req, res, 'login failed', this._testUsernameExistsInDB.bind(this))) return false;
+    if (!await this._checkRequest(req, res, 'login failed', this._testPasswordExists.bind(this))) return false;
+    if (!await this._checkRequest(req, res, 'login failed', this._testPasswordLength.bind(this))) return false;
+    return true;
+  }
+
+  async login(req, res) {
+    if (!await this._loginTests(req, res)) return;
+    const token = this._generateToken(req.body.username)
+    res.json({
+      username: req.body.username,
+      token: token
+    });
+  }
+
 }
 
 export {

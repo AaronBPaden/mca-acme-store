@@ -9,7 +9,6 @@ const Home = () => {
   useEffect(() => {
     axios.get(`${ApiConfig.URL}/item/top`, {responseType: 'json' })
       .then(res => {
-        console.log(res.data);
         setSliderList(res.data);
       })
       .catch(error => console.log(error))

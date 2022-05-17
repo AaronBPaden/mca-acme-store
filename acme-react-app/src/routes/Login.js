@@ -1,7 +1,9 @@
 import { useState } from 'react';
 import ApiConfig from '../config/ApiConfig';
 import axios from 'axios';
+import { useCookies } from 'react-cookie';
 const Login = () => {
+  const [cookies, setCookie] = useCookies(['acme-user']);
   let [ formState, setFormState ] = useState({
     username: "",
     password: "",
@@ -12,10 +14,10 @@ const Login = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     axios.post(
-      formState.register ? `${ApiConfig.URL}/user/register` : `${ApiConfig.URL}/login`,
+      formState.register ? `${ApiConfig.URL}/user/register` : `${ApiConfig.URL}/user/login`,
       formState
     ).then(res => {
-      setError(res.data);
+      setCookie('acme-user', {username: res.data.username, token: res.data.token}, {maxAge: 60});
     }).catch(error => {
       setError(error);
     });

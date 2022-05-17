@@ -1,6 +1,6 @@
 import Dropdown from 'react-bootstrap/Dropdown';
 
-const MobileHeader = () => {
+const MobileHeader = (props) => {
   return(
     <header className="header header-dropdown">
       <Dropdown className="category-nav" id="dropdownMenuButton2">
@@ -16,7 +16,10 @@ const MobileHeader = () => {
           <Dropdown.Item className="dropdown-item" href="/leisure">Leisure</Dropdown.Item>
           <Dropdown.Item className="dropdown-item" href="/medicine">Miracle Remedies</Dropdown.Item>
           <Dropdown.Divider />
-          <Dropdown.Item className="dropdown-item" href="/login">Register/Login</Dropdown.Item>
+          {props.authenticated
+            ? <Dropdown.Item className="dropdown-item" href="/user">Cart</Dropdown.Item>
+            : <Dropdown.Item className="dropdown-item" href="/login">Register/Login</Dropdown.Item>
+          }
         </Dropdown.Menu>
       </Dropdown>
     </header>

@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-const DesktopHeader = () => {
+const DesktopHeader = (props) => {
   return(
     <header className="header">
       <div className="slanted-title-container">
@@ -16,9 +16,14 @@ const DesktopHeader = () => {
           <li className="nav-item"><Link className="category-nav-link nav-link" to="/medicine">Miracle Remedies</Link></li>
         </ul>
       </nav>
-      <Link className="btn checkout-button" to="/login">
-        Register/Login
-      </Link>
+      {props.authenticated
+        ? <Link className="btn checkout-button" to="/user">
+          Profile
+        </Link>
+        : <Link className="btn checkout-button" to="/login">
+          Register/Login
+        </Link>
+      }
     </header>
   );
 };
