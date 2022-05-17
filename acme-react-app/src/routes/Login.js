@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom'
 import ApiConfig from '../config/ApiConfig';
 import axios from 'axios';
 import { useCookies } from 'react-cookie';
@@ -11,6 +12,13 @@ const Login = () => {
     register: false,
   })
   let [ error, setError ] = useState(null);
+
+  const [ goHome, setGoHome ] = useState(false);
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (goHome) navigate('/');
+  }, [goHome, navigate]);
+
   const handleSubmit = (event) => {
     event.preventDefault();
     axios.post(
@@ -18,6 +26,7 @@ const Login = () => {
       formState
     ).then(res => {
       setCookie('acme-user', {username: res.data.username, token: res.data.token}, {maxAge: 60});
+      setGoHome(true);
     }).catch(error => {
       setError(error);
     });
