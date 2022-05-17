@@ -28,10 +28,10 @@ class UserDao extends DaoCommon {
     const rows = await this._execute(`
       SELECT * FROM
         ${this.table}
-      WHERE username = '?';`,
+      WHERE username = ?;`,
       [req.body.username]
     );
-    if (!rows) return true;
+    if (!rows || rows.length === 0) return true;
     // This should not be possible
     if (rows.length > 1) {
       console.log("ERROR: Duplicate username detected in database.");
@@ -87,8 +87,8 @@ class UserDao extends DaoCommon {
       const values = [req.body.username, hash];
       let dbres;
       try {
-        [dbres] = con.execute(
-          `INSERT INTO ${table} SET ${fields.join(' = ?, ')} = ?;`,
+        [dbres] = await con.execute(
+          `INSERT INTO ${table} SET ${fields.join(' = ?, ')} = ?, role = 'user';`,
           values,
         );
       } catch (err) {
