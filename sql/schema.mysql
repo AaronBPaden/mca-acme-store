@@ -4,7 +4,7 @@ USE `acmeDB`;
 
 CREATE TABLE user (
 	user_id INT UNSIGNED AUTO_INCREMENT NOT NULL,
-	username VARCHAR(100) unique NOT NULL,
+	username VARCHAR(50) unique NOT NULL,
 	password CHAR(60) NOT NULL,
 	role ENUM('administrator', 'user'),
 	CONSTRAINT pk_user_id PRIMARY KEY (user_id)
