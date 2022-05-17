@@ -21,7 +21,7 @@ class UserDao extends DaoCommon {
   }
 
   async _testUsernameCharacters(req) {
-    return !req.body.username.match(/[^a-z0-9_\-]/);
+    return !req.body.username.match(/[^a-zA-Z0-9_\-]/);
   }
 
   async _testNoUsernameDuplicate(req) {
