@@ -115,7 +115,8 @@ class UserDao extends DaoCommon {
       const token = generateToken(username);
       res.json({
         username: username,
-        token: token
+        token: token,
+        role: 'user'
       });
     });
   }
@@ -179,6 +180,21 @@ class UserDao extends DaoCommon {
     return await bcrypt.compare(req.body.password, hash);
   }
 
+  /**
+   * return the user's role from the database.
+   * @private
+   *
+   * @param {string} username
+   * @returns {string|undefined} returns the users role
+   */
+  async _getRole(username) {
+    const rows = await this._execute(`
+      SELECT role FROM user WHERE username = ?;`,
+      [username]
+    );
+    if (rows.length === 1) return rows[0].role;
+  }
+
   async _loginTests(req, res) {
     if (!await this._checkRequest(req, res, 'login failed', this._testUsernameLength.bind(this))) return false;
     if (!await this._checkRequest(req, res, 'login failed', this._testUsernameCharacters.bind(this))) return false;
@@ -188,12 +204,20 @@ class UserDao extends DaoCommon {
     return true;
   }
 
+  /**
+   * process login request
+   * @param {Request} req an express Request object
+   * @param {Response} res an express Response object
+   */
   async login(req, res) {
     if (!await this._loginTests(req, res)) return;
-    const token = this._generateToken(req.body.username)
+    const username = req.body.username;
+    const token = this._generateToken(username)
+    const role = await this._getRole(username);
     res.json({
-      username: req.body.username,
-      token: token
+      username: username,
+      token: token,
+      role: role
     });
   }
 

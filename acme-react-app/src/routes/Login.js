@@ -25,10 +25,10 @@ const Login = () => {
       formState.register ? `${ApiConfig.URL}/user/register` : `${ApiConfig.URL}/user/login`,
       formState
     ).then(res => {
-      setCookie('acme-user', {username: res.data.username, token: res.data.token}, {maxAge: 60});
+      setCookie('acme-user', {username: res.data.username || "", token: res.data.token || "", role: res.data.role || "invalid"}, {maxAge: 60});
       setGoHome(true);
     }).catch(error => {
-      let msg = error.response.data.message || error.message;
+      let msg = error.response.data ? error.response.data.message || error.message : error.message;
       setError(msg);
     });
   }
@@ -62,12 +62,14 @@ const Login = () => {
           <input className="login-checkbox" type="checkbox" value="register" name="register" checked={formState.register} onChange={handleChange} />
 
           <button className="btn checkout-button">{formState.register ? "Register" : "Log in"}</button>
+
           {
             error &&
               <div className="error-box">
                 <p>{typeof(error) === "string" ? error : JSON.stringify(error)}</p>
               </div>
           }
+
         </form>
       </div>
     </main>
