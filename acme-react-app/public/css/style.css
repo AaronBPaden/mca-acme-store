@@ -137,6 +137,10 @@ body {
   font-size: 2em;
 }
 
+.error-box {
+  color: var(--trim);
+}
+
 .main-section {
   margin-bottom: 4rem;
 }
@@ -144,7 +148,8 @@ body {
 .about-box,
 .item-info-box,
 .items-list-item,
-.login-box {
+.login-box,
+.profile-username-inner {
   padding: 2rem;
   border: 4px solid var(--trim);
   border-radius: 10px;
@@ -154,6 +159,25 @@ body {
   text-align: justify;
   hyphens: auto;
   box-shadow: var(--shadow);
+}
+
+.profile-username-outer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 3rem;
+}
+
+.profile-username-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5rem;
+}
+
+.img-avatar {
+  max-width: 100px;
+  border-radius: 50%;
 }
 
 .login-box > form {

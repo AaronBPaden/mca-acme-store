@@ -28,7 +28,8 @@ const Login = () => {
       setCookie('acme-user', {username: res.data.username, token: res.data.token}, {maxAge: 60});
       setGoHome(true);
     }).catch(error => {
-      setError(error);
+      let msg = error.response.data.message || error.message;
+      setError(msg);
     });
   }
   const handleChange = (event) => {
