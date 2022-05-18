@@ -25,7 +25,7 @@ const Login = () => {
       formState.register ? `${ApiConfig.URL}/user/register` : `${ApiConfig.URL}/user/login`,
       formState
     ).then(res => {
-      setCookie('acme-user', {username: res.data.username || "", token: res.data.token || "", role: res.data.role || "invalid"}, {maxAge: 60});
+      setCookie('acme-user', {username: res.data.username || "", token: res.data.token || "", role: res.data.role || "invalid"}, {maxAge: 300});
       setGoHome(true);
     }).catch(error => {
       let msg = error.response.data ? error.response.data.message || error.message : error.message;

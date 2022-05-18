@@ -168,7 +168,7 @@ class UserDao extends DaoCommon {
    * @return {Token} a jwt token
    */
   _generateToken(username) {
-    return jwt.sign({username: username}, ServerConfig.SECRET, {expiresIn: '60s'});
+    return jwt.sign({username: username}, ServerConfig.SECRET, {expiresIn: '300s'});
   }
 
   async _testPasswordCorrect(req) {
