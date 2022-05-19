@@ -195,10 +195,15 @@ class UserDao extends DaoCommon {
     if (rows.length === 1) return rows[0].role;
   }
 
-  async _loginTests(req, res) {
+  async _loginUsernameTests(req, res) {
     if (!await this._checkRequest(req, res, 'login failed', this._testUsernameLength.bind(this))) return false;
     if (!await this._checkRequest(req, res, 'login failed', this._testUsernameCharacters.bind(this))) return false;
     if (!await this._checkRequest(req, res, 'login failed', this._testUsernameExistsInDB.bind(this))) return false;
+    return true;
+  }
+
+  async _loginTests(req, res) {
+    if (!await this._loginUsernameTests(req, res)) return false;
     if (!await this._checkRequest(req, res, 'login failed', this._testPasswordExists.bind(this))) return false;
     if (!await this._checkRequest(req, res, 'login failed', this._testPasswordLength.bind(this))) return false;
     return true;
@@ -218,6 +223,149 @@ class UserDao extends DaoCommon {
       username: username,
       token: token,
       role: role
+    });
+  }
+
+  async _testValidCartItemSent(req) {
+    return req.body.itemId && parseInt(req.body.itemId) >= 1;
+  }
+
+  async _addCartItemTests(req, res) {
+    if (!await this._loginUsernameTests(req, res)) return false;
+    if (!await this._checkRequest(req, res, 'login failed', this._testValidCartItemSent.bind(this))) return false;
+    return true;
+  }
+
+  /**
+   * Return an id from the username
+   * @private
+   *
+   * @param {string} username
+   * @return {number|undefined}
+   */
+  async _getUserId(username) {
+    const rows = await this._execute(`
+      SELECT user_id FROM user WHERE username = ?;`,
+      [username]
+    );
+    if (rows.length === 1) return parseInt(rows[0].user_id);
+    console.log(`DAO ERROR: cannot get user_id from ${username}`);
+  }
+
+  /**
+   * Test if an item is already in the user's cart.
+   * @private
+   *
+   * @param {number} userId
+   * @param {number} itemId
+   * @return {boolean}
+   */
+  async _itemExistsInCart(userId, itemId) {
+    const rows = await this._execute(`
+      SELECT
+        *
+      FROM
+        cart_item
+      WHERE
+        user_id = ? AND store_item_id = ?;`,
+      [userId, itemId]
+    );
+    return rows.length >= 1;
+  }
+
+  async _findCartItem(userId, itemId) {
+    const rows = await this._execute(`
+      SELECT
+        *
+      FROM
+        cart_item
+      WHERE
+       user_id = ? AND store_item_id = ?;`,
+      [userId, itemId]
+    );
+    if (rows.length === 1) return rows[0]
+    if (rows.length > 1) console.log(`DAO ERROR: duplicate cart_item ${itemId} for user ${userId}.`);
+  }
+
+  async _insertCartItem(userId, itemId) {
+    this._execute(`
+      INSERT INTO cart_item (store_item_id, user_id, quantity) VALUES (
+        ?,
+        ?,
+        ?
+      );`,
+      [itemId, userId, 1]
+    );
+  }
+
+  async _incrementCartItem(userId, itemId, quantity) {
+    const cartItem = await this._findCartItem(userId, itemId);
+    this._execute(`
+      UPDATE cart_item
+        SET quantity = ?
+      WHERE cart_item_id = ?;`,
+      [cartItem.quantity+1, cartItem.cart_item_id]
+    );
+  }
+
+  /**
+   * Add the numebr of an item in the users cart. Requires user validation.
+   * @param {Request} req an express Request object
+   * @param {Response} res an express Response object
+   */
+  async getItemQuantity(req, res) {
+    if (!await this._addCartItemTests(req, res)) return;
+    if (!this._validateToken(req.body.username, req.body.token, res)) return;
+    const userId = await this._getUserId(req.body.username);
+    const itemId = req.body.itemId;
+    const quantity = await this._itemExistsInCart(userId, itemId) ? await this._findCartItem(userId, itemId).quantity : 0;
+    res.json({
+      quantity: quantity
+    });
+  }
+
+  /**
+   * Add an item to the users cart. Requires user validation.
+   * @param {Request} req an express Request object
+   * @param {Response} res an express Response object
+   */
+  async addCartItem(req, res) {
+    if (!await this._addCartItemTests(req, res)) return;
+    if (!this._validateToken(req.body.username, req.body.token, res)) return;
+    const userId = await this._getUserId(req.body.username);
+    const itemId = req.body.itemId;
+    await this._itemExistsInCart(userId, itemId) ? await this._incrementCartItem(userId, itemId) : await this._insertCartItem(userId, itemId);
+    res.json({
+      success: true
+    });
+  }
+
+  async _getUserItems(userId) {
+    const rows = await this._execute(`
+      SELECT
+        store_item_id
+      FROM
+        cart_item
+      WHERE
+        user_id = ?`,
+      [userId]
+    );
+    return rows.map(el => el.store_item_id);
+  }
+
+  /**
+   * Return a list of the user's cart items. Requires user validation.
+   * @param {Request} req an express Request object
+   * @param {Response} res an express Response object
+   */
+  async getUserCart(req, res, ItemDao) {
+    if (!await this._loginTests(req, res)) return;
+    if (!this._validateToken(req.body.username, req.body.token, res)) return;
+    const userId = await this._getUserId(req.body.username);
+    const cart = await this._getUserItems(userId);
+    res.json({
+      user: req.body.username,
+      cart: cart
     });
   }
 

@@ -15,4 +15,16 @@ router.post('/login', (req, res) => {
   dao.login(req, res);
 });
 
+router.post('/addCartItem', (req, res) => {
+  dao.addCartItem(req, res);
+});
+
+router.post('/getItemQuantity', (req, res) => {
+  dao.getItemQuantity(req, res);
+});
+
+router.post('/getUserCart', (req, res) => {
+  dao.getUserCart(req, res);
+});
+
 export default router;

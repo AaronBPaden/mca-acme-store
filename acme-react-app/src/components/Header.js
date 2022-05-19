@@ -8,8 +8,8 @@ import DesktopHeader from './DesktopHeader';
 import ApiConfig from '../config/ApiConfig';
 
 const Header = (props) => {
-  const [cookies, removeCookie] = useCookies(['acme-user']);
-  const [authenticated, setAuthenticated] = useState(false);
+  let [cookies, removeCookie] = useCookies(['acme-user']);
+  let [authenticated, setAuthenticated] = useState(false);
   useEffect(() => {
     if (!cookies['acme-user'] || !cookies['acme-user'].username || !cookies['acme-user'].token) return;
     axios.post(`${ApiConfig.URL}/user/validate`,

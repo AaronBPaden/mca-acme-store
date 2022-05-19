@@ -12,6 +12,7 @@ import SingleItem from './routes/SingleItem';
 import Error404 from './routes/Error404';
 import About from './routes/About';
 import Login from './routes/Login';
+import Profile from './routes/Profile';
 
 createRoot(document.getElementById('root')).render(
   <CookiesProvider>
@@ -26,6 +27,7 @@ createRoot(document.getElementById('root')).render(
         <Route path='/medicine' element={<App route={<Category category="medicine" sectionName="Miracle Remedies" />} />} />
         <Route path='/about' element={<App route={<About />} />} />
         <Route path='/login' element={<App route={<Login />} />} />
+        <Route path='/user' element={<App route={<Profile />} />} />
         <Route path='*' element={<App route={<Error404 />} />} />
       </Routes>
     </BrowserRouter>
