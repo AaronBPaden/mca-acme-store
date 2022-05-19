@@ -318,7 +318,7 @@ class UserDao extends DaoCommon {
     if (!this._validateToken(req.body.username, req.body.token, res)) return;
     const userId = await this._getUserId(req.body.username);
     const itemId = req.body.itemId;
-    const quantity = await this._itemExistsInCart(userId, itemId) ? await this._findCartItem(userId, itemId).quantity : 0;
+    const quantity = await this._itemExistsInCart(userId, itemId) ? (await this._findCartItem(userId, itemId)).quantity : 0;
     res.json({
       quantity: quantity
     });

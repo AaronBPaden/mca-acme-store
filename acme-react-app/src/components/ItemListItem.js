@@ -12,12 +12,10 @@ const ItemListItem = (props) => {
   let [ active, setActive ] = useState(false);
   let [ quantity, setQuantity ] = useState(0);
   const addToCart = (event) => {
-    console.log("reached");
     axios.post(`${ApiConfig.URL}/user/addCartItem`, {
       username: cookies['acme-user'].username,
       token: cookies['acme-user'].token,
       itemId: props.item.store_item_id
-    }).then(res => {
     }).catch(error => {
       let msg = error.response.data ? error.response.data.message || error.message : error.message;
       console.log(msg);
@@ -30,7 +28,7 @@ const ItemListItem = (props) => {
       token: cookies['acme-user'].token,
       itemId: props.item.store_item_id
     }).then(res => {
-      setQuantity(res.quantity);
+      setQuantity(res.data.quantity);
     }).catch(error => {
       if (!error.response) {
         console.log(error);
