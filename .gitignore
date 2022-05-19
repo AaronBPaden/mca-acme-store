@@ -2,3 +2,4 @@ config/
 app/config/
 node_modules/
 *-lock.json
+post.sh
