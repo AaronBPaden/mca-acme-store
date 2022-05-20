@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom'
 
 import FloatingButton from './FloatingButton.js';
-import { getQuantity, addToCart, removeFromCart } from '../util/PostAPI';
+import { getQuantity, addToCart, removeFromCart } from '../util/postAPI';
 
 const ItemListItem = (props) => {
   const navigate = useNavigate();

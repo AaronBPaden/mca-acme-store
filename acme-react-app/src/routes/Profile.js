@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom'
 import { useCookies } from 'react-cookie';
 
-import { validate } from '../util/PostAPI';
+import { validate } from '../util/postAPI';
 
 import Cart from '../components/Cart';
 
@@ -40,7 +40,7 @@ const Profile = () => {
             />
           </div>
         </div>
-        <Cart cookie={cookies['acme-user']} />
+        <Cart cookies={cookies} />
       </>
       }
     </main>

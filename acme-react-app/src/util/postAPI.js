@@ -1,4 +1,5 @@
 import ApiConfig from '../config/ApiConfig';
+import { getAPIAsync } from './getAPI';
 import axios from 'axios';
 
 const checkCookies = (cookies) => {
@@ -34,10 +35,22 @@ const validate = async (cookies) => {
   return await postPrivate('user/validate', cookies);
 }
 
+const getUserCart = async (cookies) => {
+  if (!checkCookies(cookies)) throw new Error("Invalid cookie");
+  const cartIds = (await postPrivate('user/getUserCart', cookies)).data.cart;
+  return await Promise.all(cartIds.map(async (el) => {
+    return {
+      ...(await getAPIAsync(`item/${el}`)).data,
+      quantity: await getQuantity(cookies, el)
+    }
+  }));
+};
+
 export {
   postPrivate,
   getQuantity,
   addToCart,
   removeFromCart,
   validate,
+  getUserCart,
 }

@@ -4,7 +4,7 @@ import { useCookies } from 'react-cookie';
 import MobileHeader from './MobileHeader';
 import DesktopHeader from './DesktopHeader';
 
-import { validate } from '../util/PostAPI';
+import { validate } from '../util/postAPI';
 
 const Header = (props) => {
   let [cookies, removeCookie] = useCookies(['acme-user']);

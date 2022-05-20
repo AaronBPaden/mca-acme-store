@@ -1,17 +1,12 @@
 import {useState, useEffect} from 'react';
-import axios from 'axios';
 
-import ApiConfig from '../config/ApiConfig';
+import { getAPI } from '../util/getAPI';
 import Carousel from '../components/Carousel';
 
 const Home = () => {
   const [sliderList, setSliderList] = useState([]);
   useEffect(() => {
-    axios.get(`${ApiConfig.URL}/item/top`, {responseType: 'json' })
-      .then(res => {
-        setSliderList(res.data);
-      })
-      .catch(error => console.log(error))
+    getAPI('item/top', res => setSliderList(res));
   }, []);
   return (
     <main className="main">

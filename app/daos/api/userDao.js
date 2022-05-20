@@ -405,7 +405,7 @@ class UserDao extends DaoCommon {
    * @param {Response} res an express Response object
    */
   async getUserCart(req, res, ItemDao) {
-    if (!await this._loginTests(req, res)) return;
+    if (!await this._loginUsernameTests(req, res)) return;
     if (!this._validateToken(req.body.username, req.body.token, res)) return;
     const userId = await this._getUserId(req.body.username);
     const cart = await this._getUserItems(userId);

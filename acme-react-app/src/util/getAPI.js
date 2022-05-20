@@ -1,8 +1,7 @@
 import axios from 'axios';
 import ApiConfig from '../config/ApiConfig';
 
-const GetAPI = ({url, query = '', callback}) => {
-  url += query !== '' ? '?' + query : '';
+const getAPI = (url, callback) => {
   axios.get(`${ApiConfig.URL}/${url}`, {responseType: 'json' })
     .then(res => {
       callback(res.data);
@@ -10,4 +9,11 @@ const GetAPI = ({url, query = '', callback}) => {
     .catch(error => console.log(error))
 }
 
-export default GetAPI;
+const getAPIAsync = async (url) => {
+  return await axios.get(`${ApiConfig.URL}/${url}`, {responseType: 'json' })
+}
+
+export {
+  getAPI,
+  getAPIAsync
+}

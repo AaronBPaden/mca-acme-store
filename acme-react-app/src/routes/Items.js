@@ -1,12 +1,12 @@
 import {useState, useEffect} from 'react';
 
-import GetAPI from '../util/GetAPI';
+import { getAPI } from '../util/getAPI';
 import ItemList from '../components/ItemList';
 
 const Items = (props) => {
   const [itemList, setItemList] = useState([]);
   useEffect(() => {
-    GetAPI({url: 'item', callback: setItemList});
+    getAPI('item', setItemList);
   }, []);
   return (
     <main className="main">

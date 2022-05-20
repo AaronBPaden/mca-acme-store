@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom'
 import ApiConfig from '../config/ApiConfig';
-import { postPrivate } from '../util/PostAPI';
+import { postPrivate } from '../util/postAPI';
 import { useCookies } from 'react-cookie';
 const Login = () => {
   const setCookie = useCookies(['acme-user'])[1];

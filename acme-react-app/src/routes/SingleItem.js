@@ -1,13 +1,13 @@
 import { useParams } from "react-router-dom";
 import {useState, useEffect} from 'react';
-import GetAPI from '../util/GetAPI';
+import { getAPI } from '../util/getAPI';
 import Error404 from './Error404';
 
 const SingleItem = () => {
   const params = useParams();
   const [item, setItem] = useState(null);
   useEffect(() => {
-    GetAPI({url: `item/${params.itemId}`, callback: setItem});
+    getAPI(`item/${params.itemId}`, setItem);
   }, [params.itemId]);
   if (!item) {
     return <Error404 />
