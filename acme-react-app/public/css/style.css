@@ -5,7 +5,9 @@
   --prim: #E9D3AE;
   --sec: #2B4426;
   --trim: #9D331A;
-  --shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.25)
+  --shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.25);
+  --acme: 'Acme', sans-serif;
+  --lucky: 'Luckiest Guy', cursive;
 }
 
 h1,
@@ -18,7 +20,7 @@ p {
 body {
   margin: 0;
   padding: 0;
-  font-family: 'Acme', sans-serif;
+  font-family: var(--acme)
 }
 
 #root {
@@ -149,6 +151,7 @@ body {
 .item-info-box,
 .items-list-item,
 .login-box,
+.floating-button,
 .profile-username-inner {
   padding: 2rem;
   border: 4px solid var(--trim);
@@ -213,7 +216,7 @@ padding-top: 3.4rem;
 }
 
 .about-heading {
-  font-family: 'Luckiest Guy', cursive;
+  font-family: var(--lucky);
   /* Prevent unecessary gap caused by the larger text. */
   line-height: 0;
   font-size: 2em;
@@ -294,6 +297,7 @@ padding-top: 3.4rem;
 }
 
 .items-list-item {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -310,8 +314,45 @@ padding-top: 3.4rem;
   }
 }
 
+.floating-button-pushable {
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.floating-button-pushable:hover {
+  filter: grayscale(30%);
+}
+
+.floating-button-pushable:active {
+  filter: grayscale(50%);
+}
+
+.floating-button {
+  font-size: 1em;
+  font-family: var(--lucky);
+}
+
+.floating-button-add {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+}
+
+.floating-button-remove {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+}
+
+.floating-button-quantity {
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+}
+
 .items-list-name {
-  font-family: 'Luckiest Guy', cursive;
+  font-family: var(--lucky);
 }
 
 /* footer section */

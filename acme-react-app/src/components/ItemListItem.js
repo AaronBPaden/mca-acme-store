@@ -51,11 +51,15 @@ const ItemListItem = (props) => {
       navigate(`/item/${props.item.store_item_id}`);
   }
 
+  const removeFromCart = () => {
+  }
+
   return(
     <li>
       {/*<Link to={`/item/${props.item.store_item_id}`}>*/}
         <div onMouseOver={checkActive} onMouseLeave={() => setActive(false)} onClick={navigateToItem} className="items-list-item">
-          <FloatingButton className="floating-button-pushable" visible={active} handleClick={addToCart} content="+" />
+          <FloatingButton className="floating-button-pushable floating-button-add" visible={active} handleClick={addToCart} content="+" />
+          <FloatingButton className="floating-button-pushable floating-button-remove" visible={active} handleClick={removeFromCart} content="-" />
           <FloatingButton className="floating-button-quantity" visible={quantity > 0} handleClick={null} content={quantity} />
           <img
             className="img-fluid items-list-img"
