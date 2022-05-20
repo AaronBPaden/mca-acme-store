@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom'
 import ApiConfig from '../config/ApiConfig';
-import axios from 'axios';
+import { postPrivate } from '../util/PostAPI';
 import { useCookies } from 'react-cookie';
 const Login = () => {
   const setCookie = useCookies(['acme-user'])[1];
@@ -21,8 +21,9 @@ const Login = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    axios.post(
-      formState.register ? `${ApiConfig.URL}/user/register` : `${ApiConfig.URL}/user/login`,
+    postPrivate(
+      formState.register ? 'user/register' : 'user/login',
+      null,
       formState
     ).then(res => {
       setCookie('acme-user', {username: res.data.username || "", token: res.data.token || "", role: res.data.role || "invalid"}, {maxAge: 300});

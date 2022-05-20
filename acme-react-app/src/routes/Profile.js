@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom'
-import ApiConfig from '../config/ApiConfig';
-import axios from 'axios';
 import { useCookies } from 'react-cookie';
+
+import { validate } from '../util/PostAPI';
 
 import Cart from '../components/Cart';
 
@@ -17,14 +17,12 @@ const Profile = () => {
       navigate('/');
       return;
     }
-    axios.post(`${ApiConfig.URL}/user/validate`,
-      cookies['acme-user']
-    ).then(res => {
-      setAuthenticated(true);
-    }).catch(error => {
-      removeCookie('acme-user');
-      navigate('/');
-    });
+    validate(cookies)
+      .then(res => setAuthenticated(true))
+      .catch(error => {
+        removeCookie('acme-user');
+        navigate('/');
+      });
   }, [navigate, cookies, removeCookie, setAuthenticated]);
   
   return(

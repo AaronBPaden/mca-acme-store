@@ -1,25 +1,19 @@
 import { useState, useEffect } from 'react';
 import { useCookies } from 'react-cookie';
-import axios from 'axios';
 
 import MobileHeader from './MobileHeader';
 import DesktopHeader from './DesktopHeader';
 
-import ApiConfig from '../config/ApiConfig';
+import { validate } from '../util/PostAPI';
 
 const Header = (props) => {
   let [cookies, removeCookie] = useCookies(['acme-user']);
   let [authenticated, setAuthenticated] = useState(false);
   useEffect(() => {
-    if (!cookies['acme-user'] || !cookies['acme-user'].username || !cookies['acme-user'].token) return;
-    axios.post(`${ApiConfig.URL}/user/validate`,
-      cookies['acme-user']
-    ).then(res => {
-      setAuthenticated(true);
-    }).catch(error => {
-      removeCookie('acme-user');
-    });
-  }, [cookies, removeCookie]);
+    validate(cookies)
+      .then(res => setAuthenticated(true))
+      .catch(error => removeCookie('acme-user'));
+  });
   return props.width <= 1366 ? <MobileHeader authenticated={authenticated} /> : <DesktopHeader authenticated={authenticated} />;
 }
 
