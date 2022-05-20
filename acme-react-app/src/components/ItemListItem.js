@@ -56,7 +56,6 @@ const ItemListItem = (props) => {
 
   return(
     <li>
-      {/*<Link to={`/item/${props.item.store_item_id}`}>*/}
         <div onMouseOver={checkActive} onMouseLeave={() => setActive(false)} onClick={navigateToItem} className="items-list-item">
           <FloatingButton className="floating-button-pushable floating-button-add" visible={active} handleClick={addToCart} content="+" />
           <FloatingButton className="floating-button-pushable floating-button-remove" visible={active} handleClick={removeFromCart} content="-" />
@@ -72,7 +71,6 @@ const ItemListItem = (props) => {
           />
           <h3 className="items-list-name">{props.item.name}</h3>
         </div>
-        {/* </Link> */}
     </li>
   );
 }
