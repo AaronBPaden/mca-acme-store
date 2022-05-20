@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom'
 
 import FloatingButton from './FloatingButton.js';
-import { getQuantity, addToCart } from '../util/PostAPI';
+import { getQuantity, addToCart, removeFromCart } from '../util/PostAPI';
 
 const ItemListItem = (props) => {
   const navigate = useNavigate();
@@ -38,6 +38,9 @@ const ItemListItem = (props) => {
   }
 
   const handleRemoveButton = () => {
+    removeFromCart(cookies, props.item.store_item_id)
+      .then(res => setQuantityToggle(prev => !prev))
+      .catch(e => console.log(e));
   }
 
   return(

@@ -19,6 +19,10 @@ router.post('/addCartItem', (req, res) => {
   dao.addCartItem(req, res);
 });
 
+router.post('/removeCartItem', (req, res) => {
+  dao.removeCartItem(req, res);
+});
+
 router.post('/getItemQuantity', (req, res) => {
   dao.getItemQuantity(req, res);
 });

@@ -24,6 +24,11 @@ const addToCart = async (cookies, item) => {
   await postPrivate('user/addCartItem', cookies, {itemId: item});
 }
 
+const removeFromCart = async (cookies, item) => {
+  if (!checkCookies(cookies)) throw new Error("Invalid cookie");
+  await postPrivate('user/removeCartItem', cookies, {itemId: item});
+}
+
 const validate = async (cookies) => {
   if (!checkCookies(cookies)) throw new Error("Invalid cookie");
   return await postPrivate('user/validate', cookies);
@@ -33,5 +38,6 @@ export {
   postPrivate,
   getQuantity,
   addToCart,
+  removeFromCart,
   validate,
 }

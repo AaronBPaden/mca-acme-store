@@ -232,7 +232,7 @@ class UserDao extends DaoCommon {
 
   async _addCartItemTests(req, res) {
     if (!await this._loginUsernameTests(req, res)) return false;
-    if (!await this._checkRequest(req, res, 'login failed', this._testValidCartItemSent.bind(this))) return false;
+    if (!await this._checkRequest(req, res, 'invalid cart item', this._testValidCartItemSent.bind(this))) return false;
     return true;
   }
 
@@ -335,6 +335,52 @@ class UserDao extends DaoCommon {
     const userId = await this._getUserId(req.body.username);
     const itemId = req.body.itemId;
     await this._itemExistsInCart(userId, itemId) ? await this._incrementCartItem(userId, itemId) : await this._insertCartItem(userId, itemId);
+    res.json({
+      success: true
+    });
+  }
+
+  async _decrementCartItem(userId, itemId, quantity) {
+    const cartItem = await this._findCartItem(userId, itemId);
+    await this._execute(`
+      UPDATE cart_item
+        SET quantity = ?
+      WHERE store_item_id = ?;`,
+      [cartItem.quantity-1, itemId]
+    );
+  }
+
+  async _deleteCartItem(userId, itemId) {
+    await this._execute(`
+      DELETE FROM
+        cart_item
+      WHERE user_id = ? AND store_item_id = ?`,
+      [userId, itemId]
+    );
+  }
+
+  async _testItemExistsInCart(req) {
+      return await this._itemExistsInCart(await this._getUserId(req.body.username), req.body.itemId);
+  }
+
+  async _removeCartItemTests(req, res) {
+    if (!await this._addCartItemTests(req, res)) return false;
+    if (!await this._checkRequest(req, res, 'Item not in cart', this._testItemExistsInCart.bind(this))) return false;
+    return true;
+  }
+
+  /**
+   * Remove an item from the users cart. Requires user validation.
+   * @param {Request} req an express Request object
+   * @param {Response} res an express Response object
+   */
+  async removeCartItem(req, res) {
+    if (!await this._removeCartItemTests(req, res)) return;
+    if (!this._validateToken(req.body.username, req.body.token, res)) return;
+    const userId = await this._getUserId(req.body.username);
+    const itemId = req.body.itemId;
+    const cartItem = await this._findCartItem(userId, itemId);
+    cartItem.quantity > 1 ? await this._decrementCartItem(userId, itemId) : await this._deleteCartItem(userId, itemId);
     res.json({
       success: true
     });
