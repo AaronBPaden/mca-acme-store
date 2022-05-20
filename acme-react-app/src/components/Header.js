@@ -14,7 +14,9 @@ const Header = (props) => {
       .then(res => setAuthenticated(true))
       .catch(error => removeCookie('acme-user'));
   });
-  return props.width <= 1366 ? <MobileHeader authenticated={authenticated} /> : <DesktopHeader authenticated={authenticated} />;
+  return props.width <= 1366
+    ? <MobileHeader authenticated={authenticated} />
+    : <DesktopHeader authenticated={authenticated} username={authenticated ? cookies['acme-user'].username : null} />;
 }
 
 export default Header;

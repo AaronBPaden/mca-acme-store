@@ -18,7 +18,7 @@ const DesktopHeader = (props) => {
       </nav>
       {props.authenticated
         ? <Link className="btn checkout-button" to="/user">
-          Profile
+          {props.username}
         </Link>
         : <Link className="btn checkout-button" to="/login">
           Register/Login
