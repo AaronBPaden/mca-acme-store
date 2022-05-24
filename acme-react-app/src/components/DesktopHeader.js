@@ -4,6 +4,7 @@ const DesktopHeader = (props) => {
     <header className="header">
       <div className="slanted-title-container">
         <div className="title-div">
+          <img className="logo-img img-fluid" src="/images/logo.svg" alt="" />
           <h1 className="title"><Link to="/">ACME Corporation</Link></h1>
         </div>
         <div className="slanted-border"></div>

@@ -11,8 +11,8 @@ const Cart = (props) => {
   return(
     <>
       {sliderList.length > 0 &&
-      <div className="cart section-header">
-        <h2>Cart</h2>
+      <div>
+        <h2 className="section-header">Cart</h2>
         <Carousel sliderList={sliderList} />
       </div>
       }

@@ -1,22 +1,25 @@
 use acmeDB;
-INSERT INTO store_item (name, category, description, price, user_rating) VALUES (
+INSERT INTO store_item (name, img_path, category, description, price, user_rating) VALUES (
 	"Miniature Anvil",
+	"https://i.etsystatic.com/8741823/r/il/6447d0/668266788/il_1140xN.668266788_ohku.jpg",
 	"anvil",
 	"This miniature anvil, a marvel of modern technology, is specifically designed for the smithing needs of Keebler Elves. It also makes a nice keychain.",
 	10.99,
 	4.3
 );
 
-INSERT INTO store_item (name, category, description, price, user_rating) VALUES (
+INSERT INTO store_item (name, img_path, category, description, price, user_rating) VALUES (
 	"Catapult",
+	"https://pbs.twimg.com/media/DRSp1UKVwAAb0IP?format=jpg&name=large",
 	"encabulator",
 	"A classic design. Guaranteed to take a castle within a three year siege.",
 	299.99,
 	3.0
 );
 
-INSERT INTO store_item (name, category, description, smalltext, price, user_rating) VALUES (
+INSERT INTO store_item (name, img_path, category, description, smalltext, price, user_rating) VALUES (
 	"Rocket Skates",
+	"https://vignette1.wikia.nocookie.net/looneytunes/images/7/74/RocketSkates.png",
 	"leisure",
 	"Travel to the convenience store like an astronaut with the ACME Rocket Skates!",
 	"Not approved by or affiliated with NASA",
@@ -24,10 +27,11 @@ INSERT INTO store_item (name, category, description, smalltext, price, user_rati
 	5.0
 );
 
-INSERT INTO store_item (name, category, description, smalltext, price, user_rating) VALUES (
-	"Hair Grow Tonic",
+INSERT INTO store_item (name, img_path, category, description, smalltext, price, user_rating) VALUES (
+	"Hair Tonic",
+	"https://i.pinimg.com/originals/d9/7b/91/d97b910f43c4be0a131f7f7ccf8a910a.jpg",
 	"medicine",
-	"Grow you hair out with this marvel of medicine, the ACME Hair Grow Tonic. Simply grab a bruch and paint onto any surface and watch the hair grow instantly!",
+	"Grow you hair out with this marvel of medicine, the ACME Hair Tonic. Simply grab a brush and paint onto any surface and watch the hair grow instantly!",
 	"Warning: Hair color not guaranteed to match surrounding hair.",
 	99.99,
 	5.0

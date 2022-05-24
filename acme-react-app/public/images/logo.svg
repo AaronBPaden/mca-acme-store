@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="120"
+   height="120"
+   viewBox="0 0 31.75 31.75"
+   version="1.1"
+   id="svg5"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs2">
+    <marker
+       style="overflow:visible"
+       id="Arrow1Lstart"
+       refX="0.0"
+       refY="0.0"
+       orient="auto">
+      <path
+         transform="scale(0.8) translate(12.5,0)"
+         style="fill-rule:evenodd;fill:context-stroke;stroke:context-stroke;stroke-width:1.0pt"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         id="path2698" />
+    </marker>
+  </defs>
+  <g
+     id="layer1">
+    <rect
+       style="fill:#9d331a;fill-opacity:1;stroke:#2b4426;stroke-width:0.264583;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect22919"
+       width="17.863268"
+       height="17.199074"
+       x="7.7568669"
+       y="13.708503" />
+    <rect
+       style="fill:#2b4426;fill-opacity:1;stroke:#2b4426;stroke-width:0.264583;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect23161"
+       width="1.913578"
+       height="5.534358"
+       x="15.721291"
+       y="8.1789036" />
+    <rect
+       style="fill:#2b4426;fill-opacity:1;stroke:#2b4426;stroke-width:0.264583;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect23267"
+       width="23.801098"
+       height="1.2010988"
+       x="4.9212914"
+       y="6.9674754" />
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:4.65227px;line-height:1.25;font-family:Cantarell;-inkscape-font-specification:'Cantarell Bold';letter-spacing:0px;word-spacing:0px;fill:#e9d3ae;fill-opacity:1;stroke-width:0.516918"
+       x="10.208399"
+       y="23.622728"
+       id="text94347"><tspan
+         id="tspan94345"
+         style="fill:#e9d3ae;fill-opacity:1;stroke-width:0.516918"
+         x="10.208399"
+         y="23.622728">ACME</tspan></text>
+  </g>
+</svg>

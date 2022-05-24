@@ -5,10 +5,12 @@ import '@splidejs/react-splide/css';
 const Carousel = (props) => {
   return (
     <Splide aria-label="List of top products" options={{
-      type: 'loop',
+      type: props.sliderList.length < 3 ? 'slide' : 'loop',
+      arrows: props.sliderList.length > 2 ? true : false,
       autoWidth: true,
       gap: '1rem',
       pagination: false,
+      perMove: 1,
     }}>
       {props.sliderList.map((item, i) => {
         return(
